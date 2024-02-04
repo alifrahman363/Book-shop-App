@@ -27,4 +27,16 @@ public class BookInventory {
     }
 
     // Other methods for searching, selling, calculating revenue, etc.
+
+    public List<Book> searchBooks(String searchQuery) {
+        List<Book> matchingBooks = new ArrayList<>();
+        for (Book book : books) {
+            // Check if the searchQuery matches the book title or author (case-insensitive)
+            if (book.getTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                book.getAuthor().toLowerCase().contains(searchQuery.toLowerCase())) {
+                matchingBooks.add(book);
+            }
+        }
+        return matchingBooks;
+    }
 }

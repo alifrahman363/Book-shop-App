@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.bookshopapp;
 
-/**
- *
- * @author alif
- */
+import com.mycompany.bookshopapp.BookInventory;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookShopApp {
@@ -55,8 +49,7 @@ public class BookShopApp {
             switch (choice) {
                 case 1:
                     // View All Books
-//                    displayAllBooks(bookInventory.getAllBooks());
-                    System.out.println("entered option 1") ;
+                    displayAllBooks(bookInventory.getAllBooks());
                     break;
                 case 2:
                     // Search for a Book
@@ -83,8 +76,6 @@ public class BookShopApp {
         // Additional steps for saving inventory to a file can be added here
     }
 
-    // Additional methods for menu options can be added here
-
     private static void displayMainMenu() {
         System.out.println("\nMain Menu:");
         System.out.println("1. View All Books");
@@ -94,20 +85,35 @@ public class BookShopApp {
         System.out.println("5. Exit");
     }
 
-//    private static void displayAllBooks(List<Book> books) {
-//        System.out.println("\nAll Books in Inventory:");
-//        for (Book book : books) {
-////            System.out.println(book.getTitle() + " by " + book.getAuthor() +
-////                    " | Price: $" + book.getPrice() + " | Quantity in Stock: " + book.getQuantityInStock());
-//        }
-//    }
+    private static void displayAllBooks(List<Book> books) {
+        System.out.println("\nAll Books in Inventory:");
+        for (Book book : books) {
+            System.out.println(book.getTitle() + " by " + book.getAuthor() +
+                    " | Genre: " + book.getGenre() +
+                    " | Price: $" + book.getPrice() +
+                    " | Quantity in Stock: " + book.getQuantityInStock());
+        }
+    }
 
     private static void searchForBook(Scanner scanner, BookInventory bookInventory) {
-        System.out.print("Enter the book title or author to search: ");
-        String searchQuery = scanner.nextLine();
-        // Implement search functionality using bookInventory
-        // Display the book details if found, or a message if not found
+    System.out.print("Enter the book title or author to search: ");
+    String searchQuery = scanner.nextLine();
+
+    List<Book> matchingBooks = bookInventory.searchBooks(searchQuery);
+
+    if (!matchingBooks.isEmpty()) {
+        System.out.println("Matching Books:");
+        for (Book book : matchingBooks) {
+            System.out.println(book.getTitle() + " by " + book.getAuthor() +
+                    " | Genre: " + book.getGenre() +
+                    " | Price: $" + book.getPrice() +
+                    " | Quantity in Stock: " + book.getQuantityInStock());
+        }
+    } else {
+        System.out.println("No matching books found.");
     }
+}
+
 
     private static void sellBook(Scanner scanner, BookInventory bookInventory) {
         // Implement selling functionality using bookInventory

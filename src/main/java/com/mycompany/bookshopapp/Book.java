@@ -17,6 +17,25 @@ public class Book {
 
     // Getters and setters (if needed)
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantityInStock() {
+        return quantityInStock;
+    }
+
     // Additional methods can be added based on requirements
 }
-
