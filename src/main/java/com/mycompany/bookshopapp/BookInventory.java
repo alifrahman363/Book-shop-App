@@ -28,4 +28,30 @@ public class BookInventory {
         }
         return matchingBooks;
     }
+
+    public double calculateTotalRevenue() {
+        double totalRevenue = 0;
+        for (Book book : books) {
+            totalRevenue += book.getTotalRevenue();
+        }
+        return totalRevenue;
+    }
+
+    public void displayBookDetails(String title) {
+        List<Book> matchingBooks = searchBooks(title);
+
+        if (!matchingBooks.isEmpty()) {
+            Book book = matchingBooks.get(0);
+
+            System.out.println("Book Details:");
+            System.out.println("Title: " + book.getTitle());
+            System.out.println("Author: " + book.getAuthor());
+            System.out.println("Genre: " + book.getGenre());
+            System.out.println("Price: $" + book.getPrice());
+            System.out.println("Quantity in Stock: " + book.getQuantityInStock());
+            System.out.println("Total Revenue: $" + book.getTotalRevenue());
+        } else {
+            System.out.println("Book not found.");
+        }
+    }
 }
