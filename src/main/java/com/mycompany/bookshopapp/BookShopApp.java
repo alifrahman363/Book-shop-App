@@ -88,7 +88,7 @@ public class BookShopApp {
     private static void displayAllBooks(List<Book> books) {
         System.out.println("\nAll Books in Inventory:");
         for (Book book : books) {
-            System.out.println(book.getTitle() + " by " + book.getAuthor() +
+            System.out.println("Name: " + book.getTitle() + " | Author: " + book.getAuthor() +
                     " | Genre: " + book.getGenre() +
                     " | Price: $" + book.getPrice() +
                     " | Quantity in Stock: " + book.getQuantityInStock());
@@ -104,7 +104,7 @@ public class BookShopApp {
     if (!matchingBooks.isEmpty()) {
         System.out.println("Matching Books:");
         for (Book book : matchingBooks) {
-            System.out.println(book.getTitle() + " by " + book.getAuthor() +
+            System.out.println("Name: " + book.getTitle() + " | Author: " + book.getAuthor() +
                     " | Genre: " + book.getGenre() +
                     " | Price: $" + book.getPrice() +
                     " | Quantity in Stock: " + book.getQuantityInStock());
