@@ -15,7 +15,7 @@ public class Book {
         this.quantityInStock = quantityInStock;
     }
 
-    // Getters and setters (if needed)
+    // Getters and setters
 
     public String getTitle() {
         return title;
@@ -37,5 +37,7 @@ public class Book {
         return quantityInStock;
     }
 
-    // Additional methods can be added based on requirements
+    public void setQuantityInStock(int quantityInStock) {
+        this.quantityInStock = quantityInStock;
+    }
 }
