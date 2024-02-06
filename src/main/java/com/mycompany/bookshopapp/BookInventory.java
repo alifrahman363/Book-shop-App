@@ -1,5 +1,7 @@
+// BookInventory.java
 package com.mycompany.bookshopapp;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,36 +24,61 @@ public class BookInventory {
         List<Book> matchingBooks = new ArrayList<>();
         for (Book book : books) {
             if (book.getTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
-                book.getAuthor().toLowerCase().contains(searchQuery.toLowerCase())) {
+                    book.getAuthor().toLowerCase().contains(searchQuery.toLowerCase())) {
                 matchingBooks.add(book);
             }
         }
         return matchingBooks;
     }
 
-    public double calculateTotalRevenue() {
-        double totalRevenue = 0;
-        for (Book book : books) {
-            totalRevenue += book.getTotalRevenue();
-        }
-        return totalRevenue;
-    }
+    public void loadInventoryFromFile(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] bookData = line.split(",");
+                if (bookData.length == 5) {
+                    String title = bookData[0].trim();
+                    String author = bookData[1].trim();
+                    String genre = bookData[2].trim();
+                    double price = Double.parseDouble(bookData[3].trim());
+                    int quantityInStock = Integer.parseInt(bookData[4].trim());
 
-    public void displayBookDetails(String title) {
-        List<Book> matchingBooks = searchBooks(title);
-
-        if (!matchingBooks.isEmpty()) {
-            Book book = matchingBooks.get(0);
-
-            System.out.println("Book Details:");
-            System.out.println("Title: " + book.getTitle());
-            System.out.println("Author: " + book.getAuthor());
-            System.out.println("Genre: " + book.getGenre());
-            System.out.println("Price: $" + book.getPrice());
-            System.out.println("Quantity in Stock: " + book.getQuantityInStock());
-            System.out.println("Total Revenue: $" + book.getTotalRevenue());
-        } else {
-            System.out.println("Book not found.");
+                    Book book = new Book(title, author, genre, price, quantityInStock);
+                    addBook(book);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing inventory file found. Starting with an empty inventory.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+    public void saveInventoryToFile(String filename) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+            for (Book book : books) {
+                writer.println(book.getTitle() + "," + book.getAuthor() + "," +
+                        book.getGenre() + "," + book.getPrice() + "," + book.getQuantityInStock());
+            }
+            System.out.println("Inventory saved to file: " + filename);
+        } catch (IOException e) {
+            System.out.println("Error saving inventory to file: " + e.getMessage());
+        }
+    }
+    
+//        public void saveInventoryToFile(String filename) {
+//            try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+//                for (Book book : books) {
+//                    String bookData = String.format("%s,%s,%s,%.2f,%d",
+//                            book.getTitle(), book.getAuthor(), book.getGenre(),
+//                            book.getPrice(), book.getQuantityInStock());
+//                    writer.println(bookData);
+//                }
+//                System.out.println("Inventory saved to file: " + filename);
+//            } catch (IOException e) {
+//                System.out.println("Error saving inventory to file: " + e.getMessage());
+//            }
+//        }
+
+
 }

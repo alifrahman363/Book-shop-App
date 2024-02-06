@@ -1,3 +1,4 @@
+// Book.java
 package com.mycompany.bookshopapp;
 
 public class Book {
@@ -6,7 +7,8 @@ public class Book {
     private String genre;
     private double price;
     private int quantityInStock;
-    private double totalRevenue; // New field to store total revenue
+    private double totalRevenue;
+    private int originalQuantityInStock;
 
     public Book(String title, String author, String genre, double price, int quantityInStock) {
         this.title = title;
@@ -14,10 +16,9 @@ public class Book {
         this.genre = genre;
         this.price = price;
         this.quantityInStock = quantityInStock;
-        this.totalRevenue = 0; // Initialize total revenue to zero
+        this.originalQuantityInStock = quantityInStock;
+        this.totalRevenue = 0;
     }
-
-    // Getters and setters
 
     public String getTitle() {
         return title;
@@ -52,12 +53,16 @@ public class Book {
     }
 
     public void setQuantitySold(int quantitySold) {
-        // Additional validation or logic can be added if needed
-        if (quantitySold > 0 && quantitySold <= quantityInStock) {
-            this.quantityInStock -= quantitySold;
+        int remainingStock = this.quantityInStock - quantitySold;
+        if (quantitySold > 0 && remainingStock >= 0) {
+            this.quantityInStock = remainingStock;
             addToTotalRevenue(price * quantitySold);
         } else {
             System.out.println("Invalid quantity sold. Unable to update.");
         }
+    }
+
+    public int getOriginalQuantityInStock() {
+        return originalQuantityInStock;
     }
 }
