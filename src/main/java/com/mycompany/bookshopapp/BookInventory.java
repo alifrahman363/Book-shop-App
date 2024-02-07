@@ -53,7 +53,7 @@ public class BookInventory {
             e.printStackTrace();
         }
     }
-    
+
     public double calculateTotalRevenue() {
         double totalRevenue = 0;
 
@@ -65,37 +65,60 @@ public class BookInventory {
     }
 
     public void saveInventoryToFile(String bookFilename, String revenueFilename) {
-            try (PrintWriter bookWriter = new PrintWriter(new FileWriter(bookFilename));
-                 PrintWriter revenueWriter = new PrintWriter(new FileWriter(revenueFilename))) {
+        try (PrintWriter bookWriter = new PrintWriter(new FileWriter(bookFilename));
+             PrintWriter revenueWriter = new PrintWriter(new FileWriter(revenueFilename))) {
 
-                for (Book book : books) {
-                    bookWriter.println(book.getTitle() + "," + book.getAuthor() + "," +
-                            book.getGenre() + "," + book.getPrice() + "," + book.getQuantityInStock());
+            for (Book book : books) {
+                bookWriter.println(book.getTitle() + "," + book.getAuthor() + "," +
+                        book.getGenre() + "," + book.getPrice() + "," + book.getQuantityInStock());
 
-                    // Save revenue data
-                    revenueWriter.println(book.getTitle() + "," + book.getTotalRevenue());
-                }
+                // Save revenue data
+                revenueWriter.println(book.getTitle() + "," + book.getTotalRevenue());
+            }
 
-                System.out.println("Inventory saved to file: " + bookFilename);
-                System.out.println("Revenue data saved to file: " + revenueFilename);
-            } catch (IOException e) {
-                System.out.println("Error saving inventory or revenue data to file: " + e.getMessage());
+            System.out.println("Inventory saved to file: " + bookFilename);
+            System.out.println("Revenue data saved to file: " + revenueFilename);
+        } catch (IOException e) {
+            System.out.println("Error saving inventory or revenue data to file: " + e.getMessage());
         }
     }
-    
-//        public void saveInventoryToFile(String filename) {
-//            try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-//                for (Book book : books) {
-//                    String bookData = String.format("%s,%s,%s,%.2f,%d",
-//                            book.getTitle(), book.getAuthor(), book.getGenre(),
-//                            book.getPrice(), book.getQuantityInStock());
-//                    writer.println(bookData);
-//                }
-//                System.out.println("Inventory saved to file: " + filename);
-//            } catch (IOException e) {
-//                System.out.println("Error saving inventory to file: " + e.getMessage());
-//            }
-//        }
 
+    public void loadRevenueFromFile(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] revenueData = line.split(",");
+                if (revenueData.length == 2) {
+                    String title = revenueData[0].trim();
+                    double totalRevenue = Double.parseDouble(revenueData[1].trim());
+                    updateBookRevenue(title, totalRevenue);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing revenue file found. Starting with zero revenue.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void updateBookRevenue(String title, double totalRevenue) {
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                book.setTotalRevenue(totalRevenue);
+                break;
+            }
+        }
+    }
+
+    public void saveRevenueToFile(String revenueFilename) {
+        try (PrintWriter revenueWriter = new PrintWriter(new FileWriter(revenueFilename))) {
+            for (Book book : books) {
+                revenueWriter.println(book.getTitle() + "," + book.getTotalRevenue());
+            }
+
+            System.out.println("Revenue data saved to file: " + revenueFilename);
+        } catch (IOException e) {
+            System.out.println("Error saving revenue data to file: " + e.getMessage());
+        }
+    }
 }

@@ -90,10 +90,6 @@ public class BookShopApp {
         System.out.println("3. Sell a Book");
         System.out.println("4. Show Total Revenue");
         System.out.println("5. Exit");
-
-//        // Display total revenue if option 4 is chosen
-//        double totalRevenue = calculateTotalRevenue(bookInventory);
-//        System.out.println("Total Revenue: $" + totalRevenue);
     }
 
     private static void displayAllBooks(List<Book> books) {
@@ -146,11 +142,13 @@ public class BookShopApp {
                 bookToSell.setQuantitySold(soldQuantity);
 
                 // Calculate and display total revenue
-                double totalRevenue = bookInventory.calculateTotalRevenue();
-
+                double totalRevenue = calculateTotalRevenue(bookInventory);
                 System.out.println("Book sold successfully!");
                 System.out.println("Remaining quantity in stock: " + bookToSell.getQuantityInStock());
                 System.out.println("Total Revenue: $" + totalRevenue);
+
+                // Save the updated revenue to the file
+                bookInventory.saveRevenueToFile("revenue.txt");
             } else {
                 System.out.println("Sorry, the book is out of stock.");
             }
@@ -163,10 +161,7 @@ public class BookShopApp {
         double totalRevenue = 0;
 
         for (Book book : bookInventory.getAllBooks()) {
-            int soldQuantity = book.getOriginalQuantityInStock() - book.getQuantityInStock();
-            if (soldQuantity > 0) {
-                totalRevenue += (book.getPrice() * soldQuantity);
-            }
+            totalRevenue += book.getTotalRevenue();
         }
 
         return totalRevenue;

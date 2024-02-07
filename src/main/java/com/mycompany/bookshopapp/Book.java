@@ -65,4 +65,8 @@ public class Book {
     public int getOriginalQuantityInStock() {
         return originalQuantityInStock;
     }
+
+    public void setTotalRevenue(double totalRevenue) {
+        this.totalRevenue = totalRevenue;
+    }
 }
