@@ -169,6 +169,7 @@ public class BookShopApp {
         return totalRevenue;
     }
 
+    // Method to calculate total revenue and display it
     private static void calculateTotalRevenueAndDisplay(BookInventory bookInventory) {
         double totalRevenue = calculateTotalRevenue(bookInventory);
 

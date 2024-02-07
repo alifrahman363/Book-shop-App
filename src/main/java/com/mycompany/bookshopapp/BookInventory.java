@@ -6,20 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookInventory {
+    // Class representing the inventory of books in the bookshop
+
     private List<Book> books;
 
+    // Constructor to initialize the BookInventory instance
     public BookInventory() {
         this.books = new ArrayList<>();
     }
 
+    // Method to add a book to the inventory
     public void addBook(Book book) {
         books.add(book);
     }
 
+    // Method to get all books in the inventory
     public List<Book> getAllBooks() {
         return books;
     }
 
+    // Method to search for books based on title or author
     public List<Book> searchBooks(String searchQuery) {
         List<Book> matchingBooks = new ArrayList<>();
         for (Book book : books) {
@@ -31,6 +37,7 @@ public class BookInventory {
         return matchingBooks;
     }
 
+    // Method to load inventory data from files
     public void loadInventoryFromFile(String bookFilename, String revenueFilename) {
         try (BufferedReader bookReader = new BufferedReader(new FileReader(bookFilename));
              BufferedReader revenueReader = new BufferedReader(new FileReader(revenueFilename))) {
@@ -63,6 +70,7 @@ public class BookInventory {
         }
     }
 
+    // Method to calculate total revenue from book sales
     public double calculateTotalRevenue() {
         double totalRevenue = 0;
 
@@ -81,6 +89,7 @@ public class BookInventory {
         return totalRevenue;
     }
 
+    // Method to save inventory data to files
     public void saveInventoryToFile(String bookFilename, String revenueFilename) {
         try (PrintWriter bookWriter = new PrintWriter(new FileWriter(bookFilename));
              PrintWriter revenueWriter = new PrintWriter(new FileWriter(revenueFilename))) {
@@ -100,6 +109,7 @@ public class BookInventory {
         }
     }
 
+    // Method to calculate total revenue from a text file
     public double calculateRevenueFromTextFile(String revenueFilename) {
         double totalRevenue = 0;
 
@@ -120,4 +130,3 @@ public class BookInventory {
         return totalRevenue;
     }
 }
-

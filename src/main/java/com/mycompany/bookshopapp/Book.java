@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Book {
+    // Class representing a Book entity in the bookshop
+
     private String title;
     private String author;
     private String genre;
@@ -15,6 +17,7 @@ public class Book {
     private double totalRevenue;
     private int originalQuantityInStock;
 
+    // Constructor to initialize a Book instance
     public Book(String title, String author, String genre, double price, int quantityInStock) {
         this.title = title;
         this.author = author;
@@ -25,6 +28,7 @@ public class Book {
         this.totalRevenue = 0;
     }
 
+    // Getter methods for retrieving book details
     public String getTitle() {
         return title;
     }
@@ -45,18 +49,22 @@ public class Book {
         return quantityInStock;
     }
 
+    // Setter method to update quantity in stock
     public void setQuantityInStock(int quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
 
+    // Getter method for total revenue
     public double getTotalRevenue() {
         return totalRevenue;
     }
 
+    // Method to add revenue from book sales
     public void addToTotalRevenue(double revenue) {
         this.totalRevenue += revenue;
     }
 
+    // Method to set the quantity sold and update total revenue
     public void setQuantitySold(int quantitySold) {
         int remainingStock = this.quantityInStock - quantitySold;
         if (quantitySold > 0 && remainingStock >= 0) {
@@ -67,10 +75,12 @@ public class Book {
         }
     }
 
+    // Getter method for original quantity in stock
     public int getOriginalQuantityInStock() {
         return originalQuantityInStock;
     }
 
+    // Method to read revenue data from a file
     public double getRevenueFromFile(String revenueFilename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(revenueFilename))) {
             String line;
@@ -88,4 +98,3 @@ public class Book {
         return 0;
     }
 }
-
