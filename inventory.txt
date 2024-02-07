@@ -1,2 +1,0 @@
-test 1,test,test,230.0,21
-test 2,testi,testu,330.0,30

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class BookShopApp {
     public static void main(String[] args) {
+        // Step 1: Create a scanner for user input
         Scanner scanner = new Scanner(System.in);
 
         // Step 2: Display Welcome Message
@@ -38,14 +39,16 @@ public class BookShopApp {
             bookInventory.addBook(book);
         }
 
-        // Load inventory from file when the program starts
-        bookInventory.loadInventoryFromFile("inventory.txt");
+        // Step 6: Load inventory from file when the program starts
+        bookInventory.loadInventoryFromFile("combined_data.txt", "revenue.txt"); // Provide both filenames
 
+
+        // Step 7: Register a shutdown hook to save inventory to file on program exit
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            bookInventory.saveInventoryToFile("inventory.txt", "revenue.txt");
+            bookInventory.saveInventoryToFile("combined_data.txt", "revenue.txt"); // Adjust the filenames
         }));
 
-        // Step 8: Display Main Menu
+        // Step 8: Display Main Menu and Handle User Choices
         int choice;
         do {
             displayMainMenu(bookInventory);
@@ -142,13 +145,10 @@ public class BookShopApp {
                 bookToSell.setQuantitySold(soldQuantity);
 
                 // Calculate and display total revenue
-                double totalRevenue = calculateTotalRevenue(bookInventory);
+                double totalRevenue = bookInventory.calculateTotalRevenue();
                 System.out.println("Book sold successfully!");
                 System.out.println("Remaining quantity in stock: " + bookToSell.getQuantityInStock());
                 System.out.println("Total Revenue: $" + totalRevenue);
-
-                // Save the updated revenue to the file
-                bookInventory.saveRevenueToFile("revenue.txt");
             } else {
                 System.out.println("Sorry, the book is out of stock.");
             }
@@ -161,7 +161,10 @@ public class BookShopApp {
         double totalRevenue = 0;
 
         for (Book book : bookInventory.getAllBooks()) {
-            totalRevenue += book.getTotalRevenue();
+            int soldQuantity = book.getOriginalQuantityInStock() - book.getQuantityInStock();
+            if (soldQuantity > 0) {
+                totalRevenue += (book.getPrice() * soldQuantity);
+            }
         }
 
         return totalRevenue;
