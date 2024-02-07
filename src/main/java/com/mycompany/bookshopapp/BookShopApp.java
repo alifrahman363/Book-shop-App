@@ -170,8 +170,19 @@ public class BookShopApp {
         return totalRevenue;
     }
 
+//    private static void calculateTotalRevenueAndDisplay(BookInventory bookInventory) {
+//        double totalRevenue = calculateTotalRevenue(bookInventory);
+//        System.out.println("Total Revenue: $" + totalRevenue);
+//    }
+    
     private static void calculateTotalRevenueAndDisplay(BookInventory bookInventory) {
         double totalRevenue = calculateTotalRevenue(bookInventory);
+
+        // Add revenue from the existing text file
+        double existingTextFileRevenue = bookInventory.calculateRevenueFromTextFile("revenue.txt");
+        totalRevenue += existingTextFileRevenue;
+
         System.out.println("Total Revenue: $" + totalRevenue);
     }
+
 }

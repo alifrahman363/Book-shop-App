@@ -67,7 +67,15 @@ public class BookInventory {
         double totalRevenue = 0;
 
         for (Book book : books) {
-            totalRevenue += book.getTotalRevenue();
+            int soldQuantity = book.getOriginalQuantityInStock() - book.getQuantityInStock();
+            
+            // Get revenue from the text file and add it to the total
+            double existingRevenue = book.getRevenueFromFile("revenue.txt");
+            totalRevenue += existingRevenue;
+
+            if (soldQuantity > 0) {
+                totalRevenue += (book.getPrice() * soldQuantity);
+            }
         }
 
         return totalRevenue;
@@ -90,21 +98,26 @@ public class BookInventory {
         } catch (IOException e) {
             System.out.println("Error saving inventory or revenue data to file: " + e.getMessage());
         }
+    }  
+    public double calculateRevenueFromTextFile(String revenueFilename) {
+        double totalRevenue = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(revenueFilename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] revenueData = line.split(",");
+                if (revenueData.length == 2) {
+                    totalRevenue += Double.parseDouble(revenueData[1].trim());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No existing revenue file found.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return totalRevenue;
     }
-    
-//        public void saveInventoryToFile(String filename) {
-//            try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-//                for (Book book : books) {
-//                    String bookData = String.format("%s,%s,%s,%.2f,%d",
-//                            book.getTitle(), book.getAuthor(), book.getGenre(),
-//                            book.getPrice(), book.getQuantityInStock());
-//                    writer.println(bookData);
-//                }
-//                System.out.println("Inventory saved to file: " + filename);
-//            } catch (IOException e) {
-//                System.out.println("Error saving inventory to file: " + e.getMessage());
-//            }
-//        }
 
 
 }
