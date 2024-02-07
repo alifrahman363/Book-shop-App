@@ -48,7 +48,7 @@ public class BookShopApp {
         // Step 8: Display Main Menu
         int choice;
         do {
-            displayMainMenu();
+            displayMainMenu(bookInventory);
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -68,7 +68,7 @@ public class BookShopApp {
                     break;
                 case 4:
                     // Calculate Total Revenue
-                    calculateTotalRevenue(bookInventory);
+                    calculateTotalRevenueAndDisplay(bookInventory);
                     break;
                 case 5:
                     // Exit
@@ -83,13 +83,17 @@ public class BookShopApp {
         // Additional steps for saving inventory to a file can be added here
     }
 
-    private static void displayMainMenu() {
+    private static void displayMainMenu(BookInventory bookInventory) {
         System.out.println("\nMain Menu:");
         System.out.println("1. View All Books");
         System.out.println("2. Search for a Book");
         System.out.println("3. Sell a Book");
-        System.out.println("4. Calculate Total Revenue");
+        System.out.println("4. Show Total Revenue");
         System.out.println("5. Exit");
+
+//        // Display total revenue if option 4 is chosen
+//        double totalRevenue = calculateTotalRevenue(bookInventory);
+//        System.out.println("Total Revenue: $" + totalRevenue);
     }
 
     private static void displayAllBooks(List<Book> books) {
@@ -120,7 +124,7 @@ public class BookShopApp {
         }
     }
 
-private static void sellBook(Scanner scanner, BookInventory bookInventory) {
+    private static void sellBook(Scanner scanner, BookInventory bookInventory) {
         System.out.print("Enter the title of the book you want to sell: ");
         String sellTitle = scanner.nextLine();
 
@@ -166,5 +170,10 @@ private static void sellBook(Scanner scanner, BookInventory bookInventory) {
         }
 
         return totalRevenue;
+    }
+
+    private static void calculateTotalRevenueAndDisplay(BookInventory bookInventory) {
+        double totalRevenue = calculateTotalRevenue(bookInventory);
+        System.out.println("Total Revenue: $" + totalRevenue);
     }
 }
