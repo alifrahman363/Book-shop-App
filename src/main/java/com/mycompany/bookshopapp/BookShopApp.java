@@ -41,9 +41,8 @@ public class BookShopApp {
         // Load inventory from file when the program starts
         bookInventory.loadInventoryFromFile("inventory.txt");
 
-        // Add a shutdown hook to save the inventory to file when the program exits
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            bookInventory.saveInventoryToFile("inventory.txt");
+            bookInventory.saveInventoryToFile("inventory.txt", "revenue.txt");
         }));
 
         // Step 8: Display Main Menu
@@ -121,7 +120,7 @@ public class BookShopApp {
         }
     }
 
-    private static void sellBook(Scanner scanner, BookInventory bookInventory) {
+private static void sellBook(Scanner scanner, BookInventory bookInventory) {
         System.out.print("Enter the title of the book you want to sell: ");
         String sellTitle = scanner.nextLine();
 
@@ -143,8 +142,7 @@ public class BookShopApp {
                 bookToSell.setQuantitySold(soldQuantity);
 
                 // Calculate and display total revenue
-                double salePrice = bookToSell.getPrice() * soldQuantity;
-                double totalRevenue = salePrice + calculateTotalRevenue(bookInventory);
+                double totalRevenue = bookInventory.calculateTotalRevenue();
 
                 System.out.println("Book sold successfully!");
                 System.out.println("Remaining quantity in stock: " + bookToSell.getQuantityInStock());

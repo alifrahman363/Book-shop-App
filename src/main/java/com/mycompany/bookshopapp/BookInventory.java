@@ -53,16 +53,33 @@ public class BookInventory {
             e.printStackTrace();
         }
     }
+    
+    public double calculateTotalRevenue() {
+        double totalRevenue = 0;
 
-    public void saveInventoryToFile(String filename) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-            for (Book book : books) {
-                writer.println(book.getTitle() + "," + book.getAuthor() + "," +
-                        book.getGenre() + "," + book.getPrice() + "," + book.getQuantityInStock());
-            }
-            System.out.println("Inventory saved to file: " + filename);
-        } catch (IOException e) {
-            System.out.println("Error saving inventory to file: " + e.getMessage());
+        for (Book book : books) {
+            totalRevenue += book.getTotalRevenue();
+        }
+
+        return totalRevenue;
+    }
+
+    public void saveInventoryToFile(String bookFilename, String revenueFilename) {
+            try (PrintWriter bookWriter = new PrintWriter(new FileWriter(bookFilename));
+                 PrintWriter revenueWriter = new PrintWriter(new FileWriter(revenueFilename))) {
+
+                for (Book book : books) {
+                    bookWriter.println(book.getTitle() + "," + book.getAuthor() + "," +
+                            book.getGenre() + "," + book.getPrice() + "," + book.getQuantityInStock());
+
+                    // Save revenue data
+                    revenueWriter.println(book.getTitle() + "," + book.getTotalRevenue());
+                }
+
+                System.out.println("Inventory saved to file: " + bookFilename);
+                System.out.println("Revenue data saved to file: " + revenueFilename);
+            } catch (IOException e) {
+                System.out.println("Error saving inventory or revenue data to file: " + e.getMessage());
         }
     }
     
