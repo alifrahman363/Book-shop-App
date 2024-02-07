@@ -42,7 +42,6 @@ public class BookShopApp {
         // Step 6: Load inventory from file when the program starts
         bookInventory.loadInventoryFromFile("combined_data.txt", "revenue.txt"); // Provide both filenames
 
-
         // Step 7: Register a shutdown hook to save inventory to file on program exit
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             bookInventory.saveInventoryToFile("combined_data.txt", "revenue.txt"); // Adjust the filenames
@@ -170,11 +169,6 @@ public class BookShopApp {
         return totalRevenue;
     }
 
-//    private static void calculateTotalRevenueAndDisplay(BookInventory bookInventory) {
-//        double totalRevenue = calculateTotalRevenue(bookInventory);
-//        System.out.println("Total Revenue: $" + totalRevenue);
-//    }
-    
     private static void calculateTotalRevenueAndDisplay(BookInventory bookInventory) {
         double totalRevenue = calculateTotalRevenue(bookInventory);
 
@@ -184,5 +178,4 @@ public class BookShopApp {
 
         System.out.println("Total Revenue: $" + totalRevenue);
     }
-
 }

@@ -70,8 +70,8 @@ public class Book {
     public int getOriginalQuantityInStock() {
         return originalQuantityInStock;
     }
-    
-        public double getRevenueFromFile(String revenueFilename) {
+
+    public double getRevenueFromFile(String revenueFilename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(revenueFilename))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -88,3 +88,4 @@ public class Book {
         return 0;
     }
 }
+

@@ -62,13 +62,13 @@ public class BookInventory {
             e.printStackTrace();
         }
     }
-    
+
     public double calculateTotalRevenue() {
         double totalRevenue = 0;
 
         for (Book book : books) {
             int soldQuantity = book.getOriginalQuantityInStock() - book.getQuantityInStock();
-            
+
             // Get revenue from the text file and add it to the total
             double existingRevenue = book.getRevenueFromFile("revenue.txt");
             totalRevenue += existingRevenue;
@@ -98,7 +98,8 @@ public class BookInventory {
         } catch (IOException e) {
             System.out.println("Error saving inventory or revenue data to file: " + e.getMessage());
         }
-    }  
+    }
+
     public double calculateRevenueFromTextFile(String revenueFilename) {
         double totalRevenue = 0;
 
@@ -118,6 +119,5 @@ public class BookInventory {
 
         return totalRevenue;
     }
-
-
 }
+
