@@ -55,58 +55,70 @@ public class BookShopApp {
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
 
-            switch (choice) {
-                case 1:
-                    // View All Books
-                    displayAllBooks(bookInventory.getAllBooks());
-                    break;
-                case 2:
-                    // Search for a Book
-                    searchForBook(scanner, bookInventory);
-                    break;
-                case 3:
-                    // Sell a Book
-                    sellBook(scanner, bookInventory);
-                    break;
-                case 4:
-                    // Calculate Total Revenue
-                    calculateTotalRevenueAndDisplay(bookInventory);
-                    break;
-                 case 5:
-                    // Sort Books (Ascending)
-                    BookSorter.sortBooksAscending(bookInventory.getAllBooks());
-                    displayAllBooks(bookInventory.getAllBooks());
-                    break;
+                switch (choice) {
+                    case 1:
+                        // View All Books
+                        displayAllBooks(bookInventory.getAllBooks());
+                        break;
+                    case 2:
+                        // Search for a Book
+                        searchForBook(scanner, bookInventory);
+                        break;
+                    case 3:
+                        // Sell a Book
+                        sellBook(scanner, bookInventory);
+                        break;
+                    case 4:
+                        // Calculate Total Revenue
+                        calculateTotalRevenueAndDisplay(bookInventory);
+                        break;
+                     case 5:
+                        // Sort Books (Ascending)
+                        BookSorter.sortBooksAscending(bookInventory.getAllBooks());
+                        displayAllBooks(bookInventory.getAllBooks());
+                        break;
 
-                case 6:
-                    // Sort Books (Descending)
-                    BookSorter.sortBooksDescending(bookInventory.getAllBooks());
-                    displayAllBooks(bookInventory.getAllBooks());
-                    break;
+                    case 6:
+                        // Sort Books (Descending)
+                        BookSorter.sortBooksDescending(bookInventory.getAllBooks());
+                        displayAllBooks(bookInventory.getAllBooks());
+                        break;
 
-                case 7:
-                    // Exit
-                    System.out.println("Thank you for using the Book Selling Shop!");
-                    break;
+                    case 7:
+                        // Display Most Expensive Book
+                        BookStatistics.displayMostExpensiveBook(bookInventory.getAllBooks());
+                        break;
 
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                    case 8:
+                        // Display Cheapest Book
+                        BookStatistics.displayCheapestBook(bookInventory.getAllBooks());
+                        break;
+
+                    case 9:
+                        // Exit
+                        System.out.println("Thank you for using the Book Selling Shop!");
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
                 }
-            } while (choice != 7);
+            } while (choice != 9);
 
         // Additional steps for saving inventory to a file can be added here
     }
 
     private static void displayMainMenu(BookInventory bookInventory) {
-    System.out.println("\nMain Menu:");
-    System.out.println("1. View All Books");
-    System.out.println("2. Search for a Book");
-    System.out.println("3. Sell a Book");
-    System.out.println("4. Show Total Revenue");
-    System.out.println("5. Sort Books (Ascending)");
-    System.out.println("6. Sort Books (Descending)");
-    System.out.println("7. Exit");
-}
+        System.out.println("\nMain Menu:");
+        System.out.println("1. View All Books");
+        System.out.println("2. Search for a Book");
+        System.out.println("3. Sell a Book");
+        System.out.println("4. Show Total Revenue");
+        System.out.println("5. Sort Books (Ascending)");
+        System.out.println("6. Sort Books (Descending)");
+        System.out.println("7. Display Most Expensive Book");
+        System.out.println("8. Display Cheapest Book");
+        System.out.println("9. Exit");
+    }
 
     private static void displayAllBooks(List<Book> books) {
         System.out.println("\nAll Books in Inventory:");
