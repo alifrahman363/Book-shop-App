@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Book {
+public class Book implements Comparable<Book> {
     // Class representing a Book entity in the bookshop
 
     private String title;
@@ -96,5 +96,10 @@ public class Book {
             e.printStackTrace();
         }
         return 0;
+    }
+    
+     @Override
+    public int compareTo(Book otherBook) {
+        return this.title.compareToIgnoreCase(otherBook.getTitle());
     }
 }

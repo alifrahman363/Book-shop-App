@@ -72,27 +72,41 @@ public class BookShopApp {
                     // Calculate Total Revenue
                     calculateTotalRevenueAndDisplay(bookInventory);
                     break;
-                case 5:
+                 case 5:
+                    // Sort Books (Ascending)
+                    BookSorter.sortBooksAscending(bookInventory.getAllBooks());
+                    displayAllBooks(bookInventory.getAllBooks());
+                    break;
+
+                case 6:
+                    // Sort Books (Descending)
+                    BookSorter.sortBooksDescending(bookInventory.getAllBooks());
+                    displayAllBooks(bookInventory.getAllBooks());
+                    break;
+
+                case 7:
                     // Exit
                     System.out.println("Thank you for using the Book Selling Shop!");
                     break;
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
-            }
-
-        } while (choice != 5);
+                }
+            } while (choice != 7);
 
         // Additional steps for saving inventory to a file can be added here
     }
 
     private static void displayMainMenu(BookInventory bookInventory) {
-        System.out.println("\nMain Menu:");
-        System.out.println("1. View All Books");
-        System.out.println("2. Search for a Book");
-        System.out.println("3. Sell a Book");
-        System.out.println("4. Show Total Revenue");
-        System.out.println("5. Exit");
-    }
+    System.out.println("\nMain Menu:");
+    System.out.println("1. View All Books");
+    System.out.println("2. Search for a Book");
+    System.out.println("3. Sell a Book");
+    System.out.println("4. Show Total Revenue");
+    System.out.println("5. Sort Books (Ascending)");
+    System.out.println("6. Sort Books (Descending)");
+    System.out.println("7. Exit");
+}
 
     private static void displayAllBooks(List<Book> books) {
         System.out.println("\nAll Books in Inventory:");
