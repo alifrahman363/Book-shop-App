@@ -106,8 +106,12 @@ public class BookShopApp {
                         // Display Book with Least Revenue
                         BookStatistics.displayBookWithLeastRevenue(bookInventory.getAllBooks());
                         break;
-
                     case 11:
+                        // Edit Book Details
+                        BookEditor.editBookDetails(scanner, bookInventory);
+                        break;
+
+                    case 12:
                         // Exit
                         System.out.println("Thank you for using the Book Selling Shop!");
                         break;
@@ -115,7 +119,7 @@ public class BookShopApp {
                     default:
                         System.out.println("Invalid choice. Please try again.");
                 }
-            } while (choice != 11);
+            } while (choice != 12);
 
         // Additional steps for saving inventory to a file can be added here
     }
@@ -132,7 +136,8 @@ public class BookShopApp {
         System.out.println("8. Display Cheapest Book");
         System.out.println("9. Display Book with Most Revenue");
         System.out.println("10. Display Book with Least Revenue");
-        System.out.println("11. Exit");
+        System.out.println("11. Edit Book Details");
+        System.out.println("12. Exit");
     }
 
     private static void displayAllBooks(List<Book> books) {

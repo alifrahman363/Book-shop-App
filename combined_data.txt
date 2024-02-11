@@ -1,4 +1,4 @@
-tt,tt,ttt,33.0,26
+tetra,petra,chetra,46.0,56
 Top G,Andrew Tate,Live,300.0,43
 top,topto,toppp,40.0,32
 rr,44,rr4,44.0,44

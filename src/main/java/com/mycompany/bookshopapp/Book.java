@@ -52,6 +52,22 @@ public class Book implements Comparable<Book> {
     public int getQuantityInStock() {
         return quantityInStock;
     }
+    
+    // Setter method to update book title
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     // Setter method to update quantity in stock
     public void setQuantityInStock(int quantityInStock) {
