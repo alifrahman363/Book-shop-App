@@ -22,7 +22,7 @@ public class BookEditor {
             displayBookDetails(bookToEdit);
 
             // Get new details from the user
-            System.out.println("Enter new details:");
+            System.out.println("Enter new details: ");
 
             System.out.print("Title: ");
             String newTitle = scanner.nextLine();

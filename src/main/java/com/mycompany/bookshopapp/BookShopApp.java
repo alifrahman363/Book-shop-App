@@ -198,7 +198,7 @@ public class BookShopApp {
                 System.out.println("Sorry, the book is out of stock.");
             }
         } else {
-            System.out.println("Book not found. Unable to sell.");
+            System.out.println("Book not found. Unable to sell. ");
         }
     }
 

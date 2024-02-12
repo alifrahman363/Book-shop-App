@@ -21,7 +21,7 @@ public class BookSorter {
         Collections.sort(books, Comparator.reverseOrder());
     }
 
-    // Custom Comparator for sorting books based on titles
+    // Custom Comparator for sorting books based on title
     private static class TitleComparator implements Comparator<Book> {
         @Override
         public int compare(Book book1, Book book2) {

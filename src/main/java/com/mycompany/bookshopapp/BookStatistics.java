@@ -12,7 +12,7 @@ public class BookStatistics {
 
     public static void displayMostExpensiveBook(List<Book> books) {
         if (books.isEmpty()) {
-            System.out.println("No books available to calculate statistics.");
+            System.out.println("No books available to calculate statistics. ");
             return;
         }
 
