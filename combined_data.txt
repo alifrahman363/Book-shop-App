@@ -1,7 +1,9 @@
-tetra,petra,chetra,46.0,56
-Top G,Andrew Tate,Live,300.0,43
-top,topto,toppp,40.0,32
-rr,44,rr4,44.0,44
-Middle G,mid,mid,330.0,31
-Bottom G,cobra,reptile,550.0,53
-Tasty,Sweet,Funny,120.0,11
+Ignited Minds,A.P.J Abdul Kalam,Motivation,230.0,32
+To Kill a MockingBird,Harper Lee,Fiction,15.99,20
+1984,George Orwell,Dystopian Fiction,12.5,33
+Harry Potter and the Sorcerer's Stone,J.K Rowling,Fantasy,19.99,20
+The Great Gatsby,F. Scott Fitzgerald,Classic,14.95,44
+The Hobbit,J.R.R Tolkien,Fantasy,16.75,33
+The Da Vinci Code,Dan Brown,Mystery,18.99,66
+The Lord of the Rings: The Fellowship of the Ring,J.R.R Tolkien,Fantasy,22.0,44
+Pride and Prejudice,Jane Austen,Romance,13.5,44

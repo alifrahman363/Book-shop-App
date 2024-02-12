@@ -7,6 +7,7 @@ package com.mycompany.bookshopapp;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class BookShopApp {
     public static void main(String[] args) {
@@ -33,10 +34,34 @@ public class BookShopApp {
             String author = scanner.nextLine();
             System.out.print("Genre: ");
             String genre = scanner.nextLine();
-            System.out.print("Price: ");
-            double price = scanner.nextDouble();
-            System.out.print("Quantity in Stock: ");
-            int quantityInStock = scanner.nextInt();
+
+            // Error handling for price input
+            double price = 0;
+            boolean validPrice = false;
+            while (!validPrice) {
+                try {
+                    System.out.print("Price: ");
+                    price = scanner.nextDouble();
+                    validPrice = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid price.");
+                    scanner.nextLine(); // Consume the invalid input
+                }
+            }
+
+            // Error handling for quantity in stock input
+            int quantityInStock = 0;
+            boolean validStock = false;
+            while (!validStock) {
+                try {
+                    System.out.print("Quantity in Stock: ");
+                    quantityInStock = scanner.nextInt();
+                    validStock = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid quantity in stock.");
+                    scanner.nextLine(); // Consume the invalid input
+                }
+            }
             scanner.nextLine(); // Consume the newline character
 
             Book book = new Book(title, author, genre, price, quantityInStock);
@@ -55,9 +80,11 @@ public class BookShopApp {
         int choice;
         do {
             displayMainMenu(bookInventory);
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+
+            try { 
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
 
                 switch (choice) {
                     case 1:
@@ -76,23 +103,20 @@ public class BookShopApp {
                         // Calculate Total Revenue
                         calculateTotalRevenueAndDisplay(bookInventory);
                         break;
-                     case 5:
+                    case 5:
                         // Sort Books (Ascending)
                         BookSorter.sortBooksAscending(bookInventory.getAllBooks());
                         displayAllBooks(bookInventory.getAllBooks());
                         break;
-
                     case 6:
                         // Sort Books (Descending)
                         BookSorter.sortBooksDescending(bookInventory.getAllBooks());
                         displayAllBooks(bookInventory.getAllBooks());
                         break;
-
                     case 7:
                         // Display Most Expensive Book
                         BookStatistics.displayMostExpensiveBook(bookInventory.getAllBooks());
                         break;
-
                     case 8:
                         // Display Cheapest Book
                         BookStatistics.displayCheapestBook(bookInventory.getAllBooks());
@@ -101,7 +125,6 @@ public class BookShopApp {
                         // Display Book with Most Revenue
                         BookStatistics.displayBookWithMostRevenue(bookInventory.getAllBooks());
                         break;
-
                     case 10:
                         // Display Book with Least Revenue
                         BookStatistics.displayBookWithLeastRevenue(bookInventory.getAllBooks());
@@ -110,16 +133,19 @@ public class BookShopApp {
                         // Edit Book Details
                         BookEditor.editBookDetails(scanner, bookInventory);
                         break;
-
                     case 12:
                         // Exit
                         System.out.println("Thank you for using the Book Selling Shop!");
                         break;
-
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("Invalid choice. Please enter a number between 1 and 12.");
                 }
-            } while (choice != 12);
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine(); // Consume the invalid input
+                choice = 0; // Set choice to 0 to loop again
+            }
+        } while (choice != 12);
 
         // Additional steps for saving inventory to a file can be added here
     }
