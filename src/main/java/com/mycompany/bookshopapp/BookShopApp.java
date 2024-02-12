@@ -18,9 +18,19 @@ public class BookShopApp {
         System.out.println("Welcome to the Book Selling Shop!");
 
         // Step 3: Input N (Number of Books to Manage)
-        System.out.print("Enter the number of books to manage (N): ");
-        int numberOfBooks = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        int numberOfBooks = 0;
+        boolean validNumberOfBooks = false;
+        while (!validNumberOfBooks) {
+            try {
+                System.out.print("Enter the number of books to manage (N): ");
+                numberOfBooks = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+                validNumberOfBooks = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter an integer for the number of books.");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
 
         // Step 4: Initialize Book Inventory
         BookInventory bookInventory = new BookInventory();

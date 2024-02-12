@@ -1,4 +1,3 @@
-Ignited Minds,0.0
 To Kill a MockingBird,0.0
 1984,231.0
 Harry Potter and the Sorcerer's Stone,600.0
