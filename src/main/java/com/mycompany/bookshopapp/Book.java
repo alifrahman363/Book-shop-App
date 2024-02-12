@@ -111,7 +111,7 @@ public class Book implements Comparable<Book> {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No existing revenue file found. ");
+            System.out.println("No existing revenue file found.");
         } catch (IOException e) {
             e.printStackTrace();
         }
